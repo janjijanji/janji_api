@@ -51,8 +51,13 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :janji_api, JanjiApi.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "janji_api",
+  password: "janji_api",
   database: "janji_api_dev",
   hostname: "localhost",
   pool_size: 10
+
+# import the config/dev.local.exs
+# which is a specific local config for dev environment
+# and should be versioned separately.
+import_config "dev.local.exs"
