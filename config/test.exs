@@ -18,6 +18,10 @@ config :janji_api, JanjiApi.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
+# Configure Comeonin for test env
+config :comeonin, :bcrypt_log_rounds, 4
+config :comeonin, :pbkdf2_rounds, 1
+
 # import the config/test.local.exs
 # which is a specific local config for test environment
 # and should be versioned separately.

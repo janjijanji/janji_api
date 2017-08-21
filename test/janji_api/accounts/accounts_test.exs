@@ -7,7 +7,7 @@ defmodule JanjiApi.AccountsTest do
     alias JanjiApi.Accounts.User
 
     @valid_attrs %{email: "some email", name: "some name", username: "some username"}
-    @update_attrs %{email: "some updated email", name: "some updated name", username: "some updated username"}
+    @update_attrs %{email: "some updated email", name: "some updated name", username: "updated username"}
     @invalid_attrs %{email: nil, name: nil, username: nil}
 
     def user_fixture(attrs \\ %{}) do
@@ -46,7 +46,7 @@ defmodule JanjiApi.AccountsTest do
       assert %User{} = user
       assert user.email == "some updated email"
       assert user.name == "some updated name"
-      assert user.username == "some updated username"
+      assert user.username == "updated username"
     end
 
     test "update_user/2 with invalid data returns error changeset" do
