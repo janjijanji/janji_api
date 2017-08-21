@@ -17,3 +17,8 @@ config :janji_api, JanjiApi.Repo,
   database: "janji_api_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# import the config/test.local.exs
+# which is a specific local config for test environment
+# and should be versioned separately.
+import_config "test.local.exs"
