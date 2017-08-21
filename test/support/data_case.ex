@@ -21,6 +21,7 @@ defmodule JanjiApi.DataCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+      import JanjiApi.Factory
       import JanjiApi.DataCase
     end
   end
