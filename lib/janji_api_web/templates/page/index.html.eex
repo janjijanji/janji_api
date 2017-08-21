@@ -1,4 +1,0 @@
-<div class="jumbotron">
-  <h2><%= gettext "Janji-janji API" %></h2>
-  <p class="lead">API for <a href="http://janjijanji.com">janjijanji.com</a></p>
-</div>

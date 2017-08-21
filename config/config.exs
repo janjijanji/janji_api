@@ -13,7 +13,7 @@ config :janji_api,
 config :janji_api, JanjiApiWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "LvcnmFh6Oe6hCeQM4JiZgVukEXJNeEj/ADt9Ma8UmATHxdkq3sDE2oND2Cm6ewW/",
-  render_errors: [view: JanjiApiWeb.ErrorView, accepts: ~w(html json)],
+  render_errors: [view: JanjiApiWeb.ErrorView, accepts: ~w(json)],
   pubsub: [name: JanjiApi.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
