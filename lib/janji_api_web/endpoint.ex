@@ -36,6 +36,8 @@ defmodule JanjiApiWeb.Endpoint do
     key: "_janji_api_key",
     signing_salt: "/bSEXYfV"
 
+  plug CORSPlug
+
   plug JanjiApiWeb.Router
 
   @doc """

@@ -41,6 +41,7 @@ defmodule JanjiApi.Mixfile do
       {:cowboy, "~> 1.0"},
       {:comeonin, "~> 2.0"},
       {:ex_machina, "~> 2.0"},
+      {:cors_plug, "~> 1.4"},
     ]
   end
 
