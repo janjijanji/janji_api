@@ -20,6 +20,8 @@ defmodule JanjiApiWeb.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
       import JanjiApiWeb.Router.Helpers
+      import Alegro.ConnCaseHelpers
+      import JanjiApi.Factory
 
       # The default endpoint for testing
       @endpoint JanjiApiWeb.Endpoint

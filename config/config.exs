@@ -22,6 +22,17 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Configures Guardian
+config :guardian, Guardian,
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "JanjiApiWeb",
+  ttl: { 1, :days },
+  allowed_drift: 2000,
+  verify_issuer: true, # optional
+  secret_key: "uTtbnwmq+Pf7VCKceMs/6pRJFnhg3ijV6FLO0228TIXjX6cfH1mcn2TieHTcWPVa",
+  serializer: JanjiApiWeb.GuardianSerializer
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

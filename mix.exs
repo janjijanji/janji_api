@@ -38,7 +38,11 @@ defmodule JanjiApi.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:comeonin, "~> 2.0"},
+      {:ex_machina, "~> 2.0"},
+      {:cors_plug, "~> 1.4"},
+      {:guardian, "~> 0.14"},
     ]
   end
 
