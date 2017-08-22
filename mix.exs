@@ -42,6 +42,7 @@ defmodule JanjiApi.Mixfile do
       {:comeonin, "~> 2.0"},
       {:ex_machina, "~> 2.0"},
       {:cors_plug, "~> 1.4"},
+      {:guardian, "~> 0.14"},
     ]
   end
 

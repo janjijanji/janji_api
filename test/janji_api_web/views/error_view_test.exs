@@ -4,6 +4,11 @@ defmodule JanjiApiWeb.ErrorViewTest do
   # Bring render/3 and render_to_string/3 for testing custom views
   import Phoenix.View
 
+  test "renders 401.json" do
+    assert render(JanjiApiWeb.ErrorView, "401.json", []) ==
+           %{errors: %{detail: "Authentication required"}}
+  end
+
   test "renders 404.json" do
     assert render(JanjiApiWeb.ErrorView, "404.json", []) ==
            %{errors: %{detail: "Page not found"}}

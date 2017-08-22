@@ -5,8 +5,17 @@ defmodule JanjiApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
+    plug JanjiApiWeb.Auth, repo: JanjiApi.Repo
+  end
+
   scope "/api", JanjiApiWeb do
-    pipe_through :api
+    pipe_through [:api, :api_auth]
+
+    post "/login", SessionController, :create
+    delete "/logout", SessionController, :delete
 
     resources "/users", UserController, except: [:new, :edit]
   end
