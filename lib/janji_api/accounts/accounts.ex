@@ -38,6 +38,17 @@ defmodule JanjiApi.Accounts do
   def get_user!(id), do: Repo.get!(User, id)
 
   @doc """
+  Gets a single user by specific attributes.
+
+  ## Examples
+
+      iex> get_user_by(username: "test")
+      %User{}
+
+  """
+  def get_user_by(attrs), do: Repo.get_by(User, attrs)
+
+  @doc """
   Creates a user.
 
   ## Examples

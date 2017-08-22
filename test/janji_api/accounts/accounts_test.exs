@@ -18,6 +18,11 @@ defmodule JanjiApi.AccountsTest do
       assert Accounts.get_user!(user.id) == user
     end
 
+    test "get_user_by/1 returns the user with given attributes" do
+      user = insert(:user, password: nil)
+      assert Accounts.get_user_by(username: user.username) == user
+    end
+
     test "create_user/1 with valid data creates a user" do
       attrs = params_for(:user)
       assert {:ok, %User{} = user} = Accounts.create_user(attrs)
