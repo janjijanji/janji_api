@@ -3,7 +3,7 @@ defmodule JanjiApiWeb.UserView do
   alias JanjiApiWeb.UserView
 
   def render("index.json", %{users: users}) do
-    %{data: render_many(users, UserView, "user.json")}
+    %{data: %{items: render_many(users, UserView, "user.json")}}
   end
 
   def render("show.json", %{user: user}) do

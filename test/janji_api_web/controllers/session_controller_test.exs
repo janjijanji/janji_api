@@ -29,7 +29,7 @@ defmodule JanjiApiWeb.SessionControllerTest do
 
   describe "delete session" do
 
-    @tag login_as: "max"
+    @tag login_as: "test_user"
     test "if called when still logged in, renders logout.json", %{conn: conn, jwt: jwt} do
       conn = conn
       |> put_req_header("authorization", "Bearer #{jwt}")

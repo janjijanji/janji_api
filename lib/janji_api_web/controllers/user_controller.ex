@@ -6,6 +6,8 @@ defmodule JanjiApiWeb.UserController do
 
   action_fallback JanjiApiWeb.FallbackController
 
+  plug Guardian.Plug.EnsureAuthenticated, handler: JanjiApiWeb.Auth
+
   def index(conn, _params) do
     users = Accounts.list_users()
     render(conn, "index.json", users: users)
