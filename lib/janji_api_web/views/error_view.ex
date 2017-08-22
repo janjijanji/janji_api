@@ -1,6 +1,10 @@
 defmodule JanjiApiWeb.ErrorView do
   use JanjiApiWeb, :view
 
+  def render("error.json", %{"message" => message}) do
+    %{errors: %{detail: message}}
+  end
+
   def render("401.json", _assigns) do
     %{errors: %{detail: "Authentication required"}}
   end
