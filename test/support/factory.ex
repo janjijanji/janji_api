@@ -12,6 +12,14 @@ defmodule JanjiApi.Factory do
     }
   end
 
+  def promise_maker_position_factory do
+    %JanjiApi.PromiseMakers.Position{
+      title: "Title #{Base.encode16(:crypto.strong_rand_bytes(8))}",
+      description: "Description",
+      inserted_by: build(:user),
+    }
+  end
+
   def user_factory do
     %JanjiApi.Accounts.User{
       username: "user#{Base.encode16(:crypto.strong_rand_bytes(8))}",

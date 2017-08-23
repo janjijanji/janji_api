@@ -1,4 +1,4 @@
-defmodule JanjiApi.PromiseMakerTest do
+defmodule JanjiApi.PromiseMakers.PromiseMakerTest do
   use JanjiApi.DataCase
 
   alias JanjiApi.PromiseMakers.PromiseMaker
