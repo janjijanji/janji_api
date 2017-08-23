@@ -1,4 +1,4 @@
-defmodule JanjiApiWeb.VideoViewTest do
+defmodule JanjiApiWeb.UserViewTest do
   use JanjiApiWeb.ConnCase, async: true
   import Phoenix.View
 
