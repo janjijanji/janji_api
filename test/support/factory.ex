@@ -16,7 +16,7 @@ defmodule JanjiApi.Factory do
     %JanjiApi.Accounts.User{
       username: "user#{Base.encode16(:crypto.strong_rand_bytes(8))}",
       email: "user#{Base.encode16(:crypto.strong_rand_bytes(8))}@email.com",
-      password: "supersecret",
+      password: nil,
       name: "Some User",
     }
   end

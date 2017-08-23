@@ -18,7 +18,7 @@ defmodule JanjiApi.Accounts.User do
     user
     |> cast(attrs, [:username, :email, :name])
     |> validate_required([:username, :email, :name])
-    |> validate_length(:username, min: 1, max: 20)
+    |> validate_length(:username, min: 4, max: 20)
     |> unique_constraint(:username)
     |> unique_constraint(:email)
   end
