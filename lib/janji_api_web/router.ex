@@ -17,6 +17,7 @@ defmodule JanjiApiWeb.Router do
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
 
+    resources "/promise_makers", PromiseMakerController, except: [:new, :edit]
     resources "/users", UserController, except: [:new, :edit]
   end
 end
