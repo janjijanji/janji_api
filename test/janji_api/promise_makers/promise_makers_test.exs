@@ -128,4 +128,57 @@ defmodule JanjiApi.PromiseMakersTest do
       assert %Ecto.Changeset{} = PromiseMakers.change_position(position)
     end
   end
+
+  describe "terms" do
+    alias JanjiApi.PromiseMakers.Term
+
+    @invalid_attrs %{promise_maker_position: nil, promise_maker: nil, from_time: nil, inserted_by: nil}
+
+    test "list_terms/0 returns all terms" do
+      %Term{id: id} = insert(:promise_maker_term)
+      assert [%Term{id: ^id}] = PromiseMakers.list_terms()
+    end
+
+    test "get_term!/1 returns the term with given id" do
+      %Term{id: id} = insert(:promise_maker_term)
+      assert %Term{id: ^id} = PromiseMakers.get_term!(id)
+    end
+
+    test "get_term_by/1 returns the term with given attributes" do
+      %Term{id: id} = insert(:promise_maker_term)
+      assert %Term{id: ^id} = PromiseMakers.get_term_by(id: id)
+    end
+
+    test "create_term/1 with valid data creates a term" do
+      attrs = params_with_assocs(:promise_maker_term)
+      assert {:ok, %Term{}} = PromiseMakers.create_term(attrs)
+    end
+
+    test "create_term/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = PromiseMakers.create_term(@invalid_attrs)
+    end
+
+    test "update_term/2 with valid data updates the term" do
+      term = insert(:promise_maker_term)
+      update_attrs = params_with_assocs(:promise_maker_term)
+      assert {:ok, %Term{}} = PromiseMakers.update_term(term, update_attrs)
+    end
+
+    test "update_term/2 with invalid data returns error changeset" do
+      term = insert(:promise_maker_term)
+      assert {:error, %Ecto.Changeset{}} = PromiseMakers.update_term(term, @invalid_attrs)
+    end
+
+    test "delete_term/1 deletes the term" do
+      term = insert(:promise_maker_term)
+      assert {:ok, %Term{}} = PromiseMakers.delete_term(term)
+      assert_raise Ecto.NoResultsError, fn -> PromiseMakers.get_term!(term.id) end
+    end
+
+    test "change_term/1 returns a term changeset" do
+      term = insert(:promise_maker_term)
+      assert %Ecto.Changeset{} = PromiseMakers.change_term(term)
+    end
+  end
+
 end
