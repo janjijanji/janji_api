@@ -17,7 +17,7 @@ defmodule JanjiApi.PromiseMakers.Term do
   def changeset(%Term{} = promise_maker, attrs) do
     promise_maker
     |> cast(attrs, [:promise_maker_position_id, :promise_maker_id, :from_time, :thru_time, :inserted_by_id])
-    |> validate_required([:from_time])
+    |> validate_required([:promise_maker_position_id, :promise_maker_id, :from_time, :inserted_by_id])
     |> assoc_constraint(:promise_maker_position)
     |> assoc_constraint(:promise_maker)
     |> assoc_constraint(:inserted_by)

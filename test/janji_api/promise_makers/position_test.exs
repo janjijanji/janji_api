@@ -6,7 +6,7 @@ defmodule JanjiApi.PromiseMakers.PositionTest do
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
-    changeset = Position.changeset(%Position{}, params_for(:promise_maker_position))
+    changeset = Position.changeset(%Position{}, params_with_assocs(:promise_maker_position))
     assert changeset.valid?
   end
 

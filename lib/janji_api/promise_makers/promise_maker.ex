@@ -18,7 +18,7 @@ defmodule JanjiApi.PromiseMakers.PromiseMaker do
   def changeset(%PromiseMaker{} = promise_maker, attrs) do
     promise_maker
     |> cast(attrs, [:full_name, :gender, :birthplace, :birthdate, :bio, :inserted_by_id])
-    |> validate_required([:full_name])
+    |> validate_required([:full_name, :inserted_by_id])
     |> validate_length(:full_name, min: 3)
     |> validate_inclusion(:gender, ["MALE", "FEMALE"])
     |> assoc_constraint(:inserted_by)
