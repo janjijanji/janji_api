@@ -106,4 +106,56 @@ defmodule JanjiApi.PromisesTest do
       assert %Ecto.Changeset{} = Promises.change_post(post)
     end
   end
+
+  describe "post_votes" do
+    alias JanjiApi.Promises.PostVote
+
+    @invalid_attrs %{promise_post_id: nil, inserted_by: nil}
+
+    test "list_post_votes/0 returns all post_votes" do
+      %PostVote{id: id} = insert(:promise_post_vote)
+      assert [%PostVote{id: ^id}] = Promises.list_post_votes()
+    end
+
+    test "get_post_vote!/1 returns the post_vote with given id" do
+      %PostVote{id: id} = insert(:promise_post_vote)
+      assert %PostVote{id: ^id} = Promises.get_post_vote!(id)
+    end
+
+    test "get_post_vote_by/1 returns the post_vote with given attributes" do
+      %PostVote{id: id} = insert(:promise_post_vote)
+      assert %PostVote{id: ^id} = Promises.get_post_vote_by(id: id)
+    end
+
+    test "create_post_vote/1 with valid data creates a post_vote" do
+      attrs = params_with_assocs(:promise_post_vote)
+      assert {:ok, %PostVote{}} = Promises.create_post_vote(attrs)
+    end
+
+    test "create_post_vote/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Promises.create_post_vote(@invalid_attrs)
+    end
+
+    test "update_post_vote/2 with valid data updates the post_vote" do
+      post_vote = insert(:promise_post_vote)
+      update_attrs = params_with_assocs(:promise_post_vote)
+      assert {:ok, %PostVote{}} = Promises.update_post_vote(post_vote, update_attrs)
+    end
+
+    test "update_post_vote/2 with invalid data returns error changeset" do
+      post_vote = insert(:promise_post_vote)
+      assert {:error, %Ecto.Changeset{}} = Promises.update_post_vote(post_vote, @invalid_attrs)
+    end
+
+    test "delete_post_vote/1 deletes the post_vote" do
+      post_vote = insert(:promise_post_vote)
+      assert {:ok, %PostVote{}} = Promises.delete_post_vote(post_vote)
+      assert_raise Ecto.NoResultsError, fn -> Promises.get_post_vote!(post_vote.id) end
+    end
+
+    test "change_post_vote/1 returns a post_vote changeset" do
+      post_vote = insert(:promise_post_vote)
+      assert %Ecto.Changeset{} = Promises.change_post_vote(post_vote)
+    end
+  end
 end

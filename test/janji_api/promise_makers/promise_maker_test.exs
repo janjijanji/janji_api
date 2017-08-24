@@ -6,7 +6,7 @@ defmodule JanjiApi.PromiseMakers.PromiseMakerTest do
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
-    changeset = PromiseMaker.changeset(%PromiseMaker{}, params_for(:promise_maker))
+    changeset = PromiseMaker.changeset(%PromiseMaker{}, params_with_assocs(:promise_maker))
     assert changeset.valid?
   end
 

@@ -5,7 +5,7 @@ defmodule JanjiApiWeb.PromiseMakerTermControllerTest do
   alias JanjiApi.PromiseMakers.Term
   alias JanjiApiWeb.PromiseMakerTermView
 
-  @invalid_attrs %{promise_maker_position: nil, promise_maker: nil, from_time: nil, inserted_by: nil}
+  @invalid_attrs %{promise_maker_position_id: nil, promise_maker_id: nil, from_time: nil, inserted_by_id: nil}
 
   setup %{conn: conn} = config do
     if username = config[:login_as] do

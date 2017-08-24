@@ -14,8 +14,8 @@ defmodule JanjiApi.Promises.Post do
   end
 
   @doc false
-  def changeset(%Post{} = promise, attrs) do
-    promise
+  def changeset(%Post{} = post, attrs) do
+    post
     |> cast(attrs, [:promise_id, :promise_maker_term_id, :title, :body, :inserted_by_id])
     |> validate_required([:promise_id, :title, :body, :inserted_by_id])
     |> validate_length(:title, min: 3)

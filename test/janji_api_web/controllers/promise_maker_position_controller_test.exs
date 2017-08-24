@@ -5,7 +5,7 @@ defmodule JanjiApiWeb.PromiseMakerPositionControllerTest do
   alias JanjiApi.PromiseMakers.Position
   alias JanjiApiWeb.PromiseMakerPositionView
 
-  @invalid_attrs %{title: nil, inserted_by: nil}
+  @invalid_attrs %{title: nil, inserted_by_id: nil}
 
   setup %{conn: conn} = config do
     if username = config[:login_as] do

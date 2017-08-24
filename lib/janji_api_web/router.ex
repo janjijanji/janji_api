@@ -23,6 +23,7 @@ defmodule JanjiApiWeb.Router do
 
     resources "/promises", PromiseController, except: [:new, :edit]
     resources "/promise_posts", PromisePostController, except: [:new, :edit]
+    resources "/promise_post_votes", PromisePostVoteController, except: [:new, :edit]
 
     resources "/users", UserController, except: [:new, :edit]
   end

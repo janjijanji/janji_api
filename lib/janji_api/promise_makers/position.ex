@@ -15,7 +15,7 @@ defmodule JanjiApi.PromiseMakers.Position do
   def changeset(%Position{} = promise_maker, attrs) do
     promise_maker
     |> cast(attrs, [:title, :description, :inserted_by_id])
-    |> validate_required([:title])
+    |> validate_required([:title, :inserted_by_id])
     |> validate_length(:title, min: 3)
     |> assoc_constraint(:inserted_by)
   end
