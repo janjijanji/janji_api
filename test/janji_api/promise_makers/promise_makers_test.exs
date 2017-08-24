@@ -68,4 +68,64 @@ defmodule JanjiApi.PromiseMakersTest do
       assert %Ecto.Changeset{} = PromiseMakers.change_promise_maker(promise_maker)
     end
   end
+
+  describe "positions" do
+    alias JanjiApi.PromiseMakers.Position
+
+    @invalid_attrs %{title: nil, inserted_by: nil}
+
+    test "list_positions/0 returns all positions" do
+      position = insert(:promise_maker_position)
+      assert PromiseMakers.list_positions() == [position]
+    end
+
+    test "get_position!/1 returns the position with given id" do
+      position = insert(:promise_maker_position)
+      assert PromiseMakers.get_position!(position.id) == position
+    end
+
+    test "get_position_by/1 returns the position with given attributes" do
+      position = insert(:promise_maker_position)
+      assert PromiseMakers.get_position_by(title: position.title) == position
+    end
+
+    test "create_position/1 with valid data creates a position" do
+      attrs = params_with_assocs(:promise_maker_position)
+      assert {:ok, %Position{} = position} = PromiseMakers.create_position(attrs)
+      assert position.title == attrs.title
+      assert position.description == attrs.description
+      assert position.inserted_by_id == attrs.inserted_by_id
+    end
+
+    test "create_position/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = PromiseMakers.create_position(@invalid_attrs)
+    end
+
+    test "update_position/2 with valid data updates the position" do
+      position = insert(:promise_maker_position)
+      update_attrs = params_with_assocs(:promise_maker_position)
+      assert {:ok, position} = PromiseMakers.update_position(position, update_attrs)
+      assert %Position{} = position
+      assert position.title == update_attrs.title
+      assert position.description == update_attrs.description
+      assert position.inserted_by_id == update_attrs.inserted_by_id
+    end
+
+    test "update_position/2 with invalid data returns error changeset" do
+      position = insert(:promise_maker_position)
+      assert {:error, %Ecto.Changeset{}} = PromiseMakers.update_position(position, @invalid_attrs)
+      assert position == PromiseMakers.get_position!(position.id)
+    end
+
+    test "delete_position/1 deletes the position" do
+      position = insert(:promise_maker_position)
+      assert {:ok, %Position{}} = PromiseMakers.delete_position(position)
+      assert_raise Ecto.NoResultsError, fn -> PromiseMakers.get_position!(position.id) end
+    end
+
+    test "change_position/1 returns a position changeset" do
+      position = insert(:promise_maker_position)
+      assert %Ecto.Changeset{} = PromiseMakers.change_position(position)
+    end
+  end
 end
