@@ -8,6 +8,7 @@ defmodule JanjiApi.Promises do
 
   alias JanjiApi.Promises.Promise
   alias JanjiApi.Promises.Post
+  alias JanjiApi.Promises.PostVote
 
   @doc """
   Returns the list of promises.
@@ -237,5 +238,136 @@ defmodule JanjiApi.Promises do
   """
   def change_post(%Post{} = post) do
     Post.changeset(post, %{})
+  end
+
+  @doc """
+  Returns the list of post_votes.
+
+  ## Examples
+
+      iex> list_post_votes()
+      [%PostVote{}, ...]
+
+  """
+  def list_post_votes() do
+    query = from p in PostVote,
+      preload: [:promise, :promise_post, :inserted_by]
+    Repo.all query
+  end
+
+  @doc """
+  Returns the list of post_votes filtered by post.
+
+  ## Examples
+
+      iex> list_post_votes(post_id)
+      [%PostVote{}, ...]
+
+  """
+  def list_post_votes_by_post(post_id) do
+    query = from p in PostVote,
+      where: p.promise_post_id == ^post_id,
+      preload: [:promise, :promise_post, :inserted_by]
+    Repo.all query
+  end
+
+  @doc """
+  Gets a single post_vote.
+
+  Raises `Ecto.NoResultsError` if the PostVote does not exist.
+
+  ## Examples
+
+      iex> get_post_vote!(123)
+      %PostVote{}
+
+      iex> get_post_vote!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_post_vote!(id) do
+    query = from p in PostVote,
+      preload: [:promise, :promise_post, :inserted_by]
+    Repo.get!(query, id)
+  end
+
+  @doc """
+  Gets a single post_vote by specific attributes.
+
+  ## Examples
+
+      iex> get_post_vote_by(post_votename: "test")
+      %PostVote{}
+
+  """
+  def get_post_vote_by(attrs) do
+    query = from p in PostVote,
+      preload: [:promise, :promise_post, :inserted_by]
+    Repo.get_by(query, attrs)
+  end
+
+  @doc """
+  Creates a post_vote.
+
+  ## Examples
+
+      iex> create_post_vote(%{field: value})
+      {:ok, %PostVote{}}
+
+      iex> create_post_vote(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_post_vote(attrs \\ %{}) do
+    %PostVote{}
+    |> PostVote.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a post_vote.
+
+  ## Examples
+
+      iex> update_post_vote(post_vote, %{field: new_value})
+      {:ok, %PostVote{}}
+
+      iex> update_post_vote(post_vote, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_post_vote(%PostVote{} = post_vote, attrs) do
+    post_vote
+    |> PostVote.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a PostVote.
+
+  ## Examples
+
+      iex> delete_post_vote(post_vote)
+      {:ok, %PostVote{}}
+
+      iex> delete_post_vote(post_vote)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_post_vote(%PostVote{} = post_vote) do
+    Repo.delete(post_vote)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking post_vote changes.
+
+  ## Examples
+
+      iex> change_post_vote(post_vote)
+      %Ecto.Changeset{source: %PostVote{}}
+
+  """
+  def change_post_vote(%PostVote{} = post_vote) do
+    PostVote.changeset(post_vote, %{})
   end
 end

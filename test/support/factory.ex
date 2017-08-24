@@ -51,6 +51,14 @@ defmodule JanjiApi.Factory do
     }
   end
 
+  def promise_post_vote_factory do
+    %JanjiApi.Promises.PostVote{
+      promise: build(:promise),
+      promise_post: build(:promise_post),
+      inserted_by: build(:user),
+    }
+  end
+
   def user_factory do
     %JanjiApi.Accounts.User{
       username: "user#{Base.encode16(:crypto.strong_rand_bytes(8))}",
