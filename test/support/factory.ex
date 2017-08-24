@@ -30,6 +30,17 @@ defmodule JanjiApi.Factory do
     }
   end
 
+  def promise_factory do
+    %JanjiApi.Promises.Promise{
+      promise_maker: build(:promise_maker),
+      title: "Title #{Base.encode16(:crypto.strong_rand_bytes(8))}",
+      promised_at: ~N[2017-01-01 00:00:00],
+      description: "Description",
+      url: "http://www.url.com",
+      inserted_by: build(:user),
+    }
+  end
+
   def user_factory do
     %JanjiApi.Accounts.User{
       username: "user#{Base.encode16(:crypto.strong_rand_bytes(8))}",
