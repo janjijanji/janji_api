@@ -17,4 +17,12 @@ defmodule JanjiApiWeb.PromiseMakerPositionView do
       description: promise_maker_position.description,
       inserted_by: render_one(promise_maker_position.inserted_by, UserView, "user.json")}
   end
+
+  def render("promise_maker_position_no_rel.json",
+    %{promise_maker_position: promise_maker_position}) do
+
+    %{id: promise_maker_position.id,
+      title: promise_maker_position.title,
+      description: promise_maker_position.description}
+  end
 end
