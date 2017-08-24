@@ -9,6 +9,7 @@ defmodule JanjiApi.Promises do
   alias JanjiApi.Promises.Promise
   alias JanjiApi.Promises.Post
   alias JanjiApi.Promises.PostVote
+  alias JanjiApi.Promises.News
 
   @doc """
   Returns the list of promises.
@@ -369,5 +370,120 @@ defmodule JanjiApi.Promises do
   """
   def change_post_vote(%PostVote{} = post_vote) do
     PostVote.changeset(post_vote, %{})
+  end
+
+  @doc """
+  Returns the list of news.
+
+  ## Examples
+
+      iex> list_news()
+      [%News{}, ...]
+
+  """
+  def list_news() do
+    query = from p in News,
+      preload: [:promise, :inserted_by]
+    Repo.all query
+  end
+
+  @doc """
+  Gets a single news.
+
+  Raises `Ecto.NoResultsError` if the News does not exist.
+
+  ## Examples
+
+      iex> get_news!(123)
+      %News{}
+
+      iex> get_news!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_news!(id) do
+    query = from p in News,
+      preload: [:promise, :inserted_by]
+    Repo.get!(query, id)
+  end
+
+  @doc """
+  Gets a single news by specific attributes.
+
+  ## Examples
+
+      iex> get_news_by(newsname: "test")
+      %News{}
+
+  """
+  def get_news_by(attrs) do
+    query = from p in News,
+      preload: [:promise, :inserted_by]
+    Repo.get_by(query, attrs)
+  end
+
+  @doc """
+  Creates a news.
+
+  ## Examples
+
+      iex> create_news(%{field: value})
+      {:ok, %News{}}
+
+      iex> create_news(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_news(attrs \\ %{}) do
+    %News{}
+    |> News.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a news.
+
+  ## Examples
+
+      iex> update_news(news, %{field: new_value})
+      {:ok, %News{}}
+
+      iex> update_news(news, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_news(%News{} = news, attrs) do
+    news
+    |> News.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a News.
+
+  ## Examples
+
+      iex> delete_news(news)
+      {:ok, %News{}}
+
+      iex> delete_news(news)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_news(%News{} = news) do
+    Repo.delete(news)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking news changes.
+
+  ## Examples
+
+      iex> change_news(news)
+      %Ecto.Changeset{source: %News{}}
+
+  """
+  def change_news(%News{} = news) do
+    News.changeset(news, %{})
   end
 end

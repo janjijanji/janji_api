@@ -22,6 +22,7 @@ defmodule JanjiApiWeb.Router do
     resources "/promise_maker_terms", PromiseMakerTermController, except: [:new, :edit]
 
     resources "/promises", PromiseController, except: [:new, :edit]
+    resources "/promise_news", PromiseNewsController, except: [:new, :edit]
     resources "/promise_posts", PromisePostController, except: [:new, :edit]
     resources "/promise_post_votes", PromisePostVoteController, except: [:new, :edit]
 

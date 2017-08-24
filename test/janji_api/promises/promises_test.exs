@@ -6,7 +6,7 @@ defmodule JanjiApi.PromisesTest do
   describe "promises" do
     alias JanjiApi.Promises.Promise
 
-    @invalid_attrs %{promise_maker: nil, title: nil, promised_at: nil, description: nil, inserted_by: nil}
+    @invalid_attrs %{promise_maker_id: nil, title: nil, promised_at: nil, description: nil, inserted_by_id: nil}
 
     test "list_promises/0 returns all promises" do
       %Promise{id: id} = insert(:promise)
@@ -58,7 +58,7 @@ defmodule JanjiApi.PromisesTest do
   describe "posts" do
     alias JanjiApi.Promises.Post
 
-    @invalid_attrs %{promise: nil, title: nil, body: nil, inserted_by: nil}
+    @invalid_attrs %{promise_id: nil, title: nil, body: nil, inserted_by_id: nil}
 
     test "list_posts/0 returns all posts" do
       %Post{id: id} = insert(:promise_post)
@@ -156,6 +156,58 @@ defmodule JanjiApi.PromisesTest do
     test "change_post_vote/1 returns a post_vote changeset" do
       post_vote = insert(:promise_post_vote)
       assert %Ecto.Changeset{} = Promises.change_post_vote(post_vote)
+    end
+  end
+
+  describe "news" do
+    alias JanjiApi.Promises.News
+
+    @invalid_attrs %{promise_id: nil, title: nil, published_at: nil, body: nil, inserted_by_id: nil}
+
+    test "list_news/0 returns all news" do
+      %News{id: id} = insert(:promise_news)
+      assert [%News{id: ^id}] = Promises.list_news()
+    end
+
+    test "get_news!/1 returns the news with given id" do
+      %News{id: id} = insert(:promise_news)
+      assert %News{id: ^id} = Promises.get_news!(id)
+    end
+
+    test "get_news_by/1 returns the news with given attributes" do
+      %News{id: id} = insert(:promise_news)
+      assert %News{id: ^id} = Promises.get_news_by(id: id)
+    end
+
+    test "create_news/1 with valid data creates a news" do
+      attrs = params_with_assocs(:promise_news)
+      assert {:ok, %News{}} = Promises.create_news(attrs)
+    end
+
+    test "create_news/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Promises.create_news(@invalid_attrs)
+    end
+
+    test "update_news/2 with valid data updates the news" do
+      news = insert(:promise_news)
+      update_attrs = params_with_assocs(:promise_news)
+      assert {:ok, %News{}} = Promises.update_news(news, update_attrs)
+    end
+
+    test "update_news/2 with invalid data returns error changeset" do
+      news = insert(:promise_news)
+      assert {:error, %Ecto.Changeset{}} = Promises.update_news(news, @invalid_attrs)
+    end
+
+    test "delete_news/1 deletes the news" do
+      news = insert(:promise_news)
+      assert {:ok, %News{}} = Promises.delete_news(news)
+      assert_raise Ecto.NoResultsError, fn -> Promises.get_news!(news.id) end
+    end
+
+    test "change_news/1 returns a news changeset" do
+      news = insert(:promise_news)
+      assert %Ecto.Changeset{} = Promises.change_news(news)
     end
   end
 end
