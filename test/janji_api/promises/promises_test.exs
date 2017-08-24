@@ -54,4 +54,56 @@ defmodule JanjiApi.PromisesTest do
       assert %Ecto.Changeset{} = Promises.change_promise(promise)
     end
   end
+
+  describe "posts" do
+    alias JanjiApi.Promises.Post
+
+    @invalid_attrs %{promise: nil, title: nil, body: nil, inserted_by: nil}
+
+    test "list_posts/0 returns all posts" do
+      %Post{id: id} = insert(:promise_post)
+      assert [%Post{id: ^id}] = Promises.list_posts()
+    end
+
+    test "get_post!/1 returns the post with given id" do
+      %Post{id: id} = insert(:promise_post)
+      assert %Post{id: ^id} = Promises.get_post!(id)
+    end
+
+    test "get_post_by/1 returns the post with given attributes" do
+      %Post{id: id} = insert(:promise_post)
+      assert %Post{id: ^id} = Promises.get_post_by(id: id)
+    end
+
+    test "create_post/1 with valid data creates a post" do
+      attrs = params_with_assocs(:promise_post)
+      assert {:ok, %Post{}} = Promises.create_post(attrs)
+    end
+
+    test "create_post/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Promises.create_post(@invalid_attrs)
+    end
+
+    test "update_post/2 with valid data updates the post" do
+      post = insert(:promise_post)
+      update_attrs = params_with_assocs(:promise_post)
+      assert {:ok, %Post{}} = Promises.update_post(post, update_attrs)
+    end
+
+    test "update_post/2 with invalid data returns error changeset" do
+      post = insert(:promise_post)
+      assert {:error, %Ecto.Changeset{}} = Promises.update_post(post, @invalid_attrs)
+    end
+
+    test "delete_post/1 deletes the post" do
+      post = insert(:promise_post)
+      assert {:ok, %Post{}} = Promises.delete_post(post)
+      assert_raise Ecto.NoResultsError, fn -> Promises.get_post!(post.id) end
+    end
+
+    test "change_post/1 returns a post changeset" do
+      post = insert(:promise_post)
+      assert %Ecto.Changeset{} = Promises.change_post(post)
+    end
+  end
 end

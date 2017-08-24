@@ -17,13 +17,23 @@ defmodule JanjiApiWeb.PromiseMakerTermView do
   end
 
   def render("promise_maker_term.json", %{promise_maker_term: promise_maker_term}) do
-    %{id: promise_maker_term.id,
+    %{
+      id: promise_maker_term.id,
       promise_maker_position: render_one(promise_maker_term.promise_maker_position,
         PromiseMakerPositionView, "promise_maker_position_no_rel.json"),
       promise_maker: render_one(promise_maker_term.promise_maker,
         PromiseMakerView, "promise_maker_no_rel.json"),
       from_time: promise_maker_term.from_time,
       thru_time: promise_maker_term.thru_time,
-      inserted_by: render_one(promise_maker_term.inserted_by, UserView, "user.json")}
+      inserted_by: render_one(promise_maker_term.inserted_by, UserView, "user.json"),
+    }
+  end
+
+  def render("promise_maker_term_no_rel.json", %{promise_maker_term: promise_maker_term}) do
+    %{
+      id: promise_maker_term.id,
+      from_time: promise_maker_term.from_time,
+      thru_time: promise_maker_term.thru_time,
+    }
   end
 end

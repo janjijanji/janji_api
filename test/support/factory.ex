@@ -41,6 +41,16 @@ defmodule JanjiApi.Factory do
     }
   end
 
+  def promise_post_factory do
+    %JanjiApi.Promises.Post{
+      promise: build(:promise),
+      promise_maker_term: build(:promise_maker_term),
+      title: "Title #{Base.encode16(:crypto.strong_rand_bytes(8))}",
+      body: "Body",
+      inserted_by: build(:user),
+    }
+  end
+
   def user_factory do
     %JanjiApi.Accounts.User{
       username: "user#{Base.encode16(:crypto.strong_rand_bytes(8))}",
