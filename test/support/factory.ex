@@ -20,6 +20,16 @@ defmodule JanjiApi.Factory do
     }
   end
 
+  def promise_maker_term_factory do
+    %JanjiApi.PromiseMakers.Term{
+      promise_maker_position: build(:promise_maker_position),
+      promise_maker: build(:promise_maker),
+      from_time: ~N[2017-01-01 00:00:00],
+      thru_time: ~N[2017-12-31 00:00:00],
+      inserted_by: build(:user),
+    }
+  end
+
   def user_factory do
     %JanjiApi.Accounts.User{
       username: "user#{Base.encode16(:crypto.strong_rand_bytes(8))}",
