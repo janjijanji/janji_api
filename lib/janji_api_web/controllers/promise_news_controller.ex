@@ -14,6 +14,9 @@ defmodule JanjiApiWeb.PromiseNewsController do
   end
 
   def create(conn, %{"promise_news" => promise_news_params}) do
+    promise_news_params = %{ promise_news_params |
+      "inserted_by_id" => conn.assigns.current_user.id}
+
     with {:ok, %News{} = promise_news} <-
       Promises.create_news(promise_news_params) do
 

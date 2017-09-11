@@ -30,7 +30,7 @@ defmodule JanjiApiWeb.PromisePostVoteControllerTest do
 
   describe "create promise_post_vote" do
     @tag login_as: "test_user"
-    test "renders promise_post_vote when data is valid", %{conn: conn, jwt: jwt} do
+    test "renders promise_post_vote when data is valid", %{conn: conn, jwt: jwt, user: user} do
       attrs = params_with_assocs(:promise_post_vote)
 
       conn = conn
@@ -48,7 +48,7 @@ defmodule JanjiApiWeb.PromisePostVoteControllerTest do
       assert resp["id"] == id
       assert resp["promise"]["id"] == promise_post.promise_id
       assert resp["promise_post"]["id"] == attrs.promise_post_id
-      assert resp["inserted_by"]["id"] == attrs.inserted_by_id
+      assert resp["inserted_by"]["id"] == user.id
     end
 
     @tag login_as: "test_user"

@@ -14,6 +14,9 @@ defmodule JanjiApiWeb.PromiseMakerTermController do
   end
 
   def create(conn, %{"promise_maker_term" => promise_maker_term_params}) do
+    promise_maker_term_params = %{ promise_maker_term_params |
+      "inserted_by_id" => conn.assigns.current_user.id}
+
     with {:ok, %Term{} = promise_maker_term} <-
       PromiseMakers.create_term(promise_maker_term_params) do
 

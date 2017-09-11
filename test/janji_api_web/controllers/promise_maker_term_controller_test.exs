@@ -29,7 +29,7 @@ defmodule JanjiApiWeb.PromiseMakerTermControllerTest do
 
   describe "create promise_maker_term" do
     @tag login_as: "test_user"
-    test "renders promise_maker_term when data is valid", %{conn: conn, jwt: jwt} do
+    test "renders promise_maker_term when data is valid", %{conn: conn, jwt: jwt, user: user} do
       attrs = params_with_assocs(:promise_maker_term)
       conn = conn
       |> put_req_header("authorization", "Bearer #{jwt}")
@@ -47,7 +47,7 @@ defmodule JanjiApiWeb.PromiseMakerTermControllerTest do
       assert NaiveDateTime.compare(resp_from_time, attrs.from_time)
       {:ok, resp_thru_time} = NaiveDateTime.from_iso8601(resp["thru_time"])
       assert NaiveDateTime.compare(resp_thru_time, attrs.thru_time)
-      assert resp["inserted_by"]["id"] == attrs.inserted_by_id
+      assert resp["inserted_by"]["id"] == user.id
     end
 
     @tag login_as: "test_user"

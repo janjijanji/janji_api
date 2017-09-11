@@ -29,7 +29,7 @@ defmodule JanjiApiWeb.PromiseControllerTest do
 
   describe "create promise" do
     @tag login_as: "test_user"
-    test "renders promise when data is valid", %{conn: conn, jwt: jwt} do
+    test "renders promise when data is valid", %{conn: conn, jwt: jwt, user: user} do
       attrs = params_with_assocs(:promise)
       conn = conn
       |> put_req_header("authorization", "Bearer #{jwt}")
@@ -47,7 +47,7 @@ defmodule JanjiApiWeb.PromiseControllerTest do
       assert NaiveDateTime.compare(resp_promised_at, attrs.promised_at)
       assert resp["description"] == attrs.description
       assert resp["url"] == attrs.url
-      assert resp["inserted_by"]["id"] == attrs.inserted_by_id
+      assert resp["inserted_by"]["id"] == user.id
     end
 
     @tag login_as: "test_user"

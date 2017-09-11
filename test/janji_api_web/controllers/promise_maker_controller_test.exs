@@ -29,7 +29,7 @@ defmodule JanjiApiWeb.PromiseMakerControllerTest do
 
   describe "create promise_maker" do
     @tag login_as: "test_user"
-    test "renders promise_maker when data is valid", %{conn: conn, jwt: jwt} do
+    test "renders promise_maker when data is valid", %{conn: conn, jwt: jwt, user: user} do
       attrs = params_with_assocs(:promise_maker)
       conn = conn
       |> put_req_header("authorization", "Bearer #{jwt}")
@@ -46,7 +46,7 @@ defmodule JanjiApiWeb.PromiseMakerControllerTest do
       assert resp["birthplace"] == attrs.birthplace
       assert resp["birthdate"] == Date.to_iso8601(attrs.birthdate)
       assert resp["bio"] == attrs.bio
-      assert resp["inserted_by"]["id"] == attrs.inserted_by_id
+      assert resp["inserted_by"]["id"] == user.id
     end
 
     @tag login_as: "test_user"

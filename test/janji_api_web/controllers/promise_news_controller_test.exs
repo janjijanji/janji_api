@@ -29,7 +29,7 @@ defmodule JanjiApiWeb.PromiseNewsControllerTest do
 
   describe "create promise_news" do
     @tag login_as: "test_user"
-    test "renders promise_news when data is valid", %{conn: conn, jwt: jwt} do
+    test "renders promise_news when data is valid", %{conn: conn, jwt: jwt, user: user} do
       attrs = params_with_assocs(:promise_news)
       conn = conn
       |> put_req_header("authorization", "Bearer #{jwt}")
@@ -48,7 +48,7 @@ defmodule JanjiApiWeb.PromiseNewsControllerTest do
       assert resp["summary"] == attrs.summary
       assert resp["body"] == attrs.body
       assert resp["url"] == attrs.url
-      assert resp["inserted_by"]["id"] == attrs.inserted_by_id
+      assert resp["inserted_by"]["id"] == user.id
     end
 
     @tag login_as: "test_user"
