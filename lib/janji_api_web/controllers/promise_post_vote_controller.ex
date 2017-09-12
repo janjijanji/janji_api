@@ -14,8 +14,7 @@ defmodule JanjiApiWeb.PromisePostVoteController do
   end
 
   def create(conn, %{"promise_post_vote" => promise_post_vote_params}) do
-    promise_post_vote_params = %{ promise_post_vote_params |
-      "inserted_by_id" => conn.assigns.current_user.id}
+    promise_post_vote_params = Map.put(promise_post_vote_params, "inserted_by_id", conn.assigns.current_user.id)
 
     with {:ok, %PostVote{} = promise_post_vote} <-
       Promises.create_post_vote(promise_post_vote_params) do

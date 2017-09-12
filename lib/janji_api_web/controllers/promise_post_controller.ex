@@ -14,8 +14,7 @@ defmodule JanjiApiWeb.PromisePostController do
   end
 
   def create(conn, %{"promise_post" => promise_post_params}) do
-    promise_post_params = %{ promise_post_params |
-      "inserted_by_id" => conn.assigns.current_user.id}
+    promise_post_params = Map.put(promise_post_params, "inserted_by_id", conn.assigns.current_user.id)
 
     with {:ok, %Post{} = promise_post} <-
       Promises.create_post(promise_post_params) do

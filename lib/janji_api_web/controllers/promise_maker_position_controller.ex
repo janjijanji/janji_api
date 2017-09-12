@@ -14,8 +14,7 @@ defmodule JanjiApiWeb.PromiseMakerPositionController do
   end
 
   def create(conn, %{"promise_maker_position" => promise_maker_position_params}) do
-    promise_maker_position_params = %{ promise_maker_position_params |
-      "inserted_by_id" => conn.assigns.current_user.id}
+    promise_maker_position_params = Map.put(promise_maker_position_params, "inserted_by_id", conn.assigns.current_user.id)
 
     with {:ok, %Position{} = promise_maker_position} <-
       PromiseMakers.create_position(promise_maker_position_params) do
