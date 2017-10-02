@@ -15,8 +15,10 @@ use Mix.Config
 # which you typically run after static files are built.
 config :janji_api, JanjiApiWeb.Endpoint,
   load_from_system_env: true,
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  url: [host: "api.janjijanji.com", port: 50080],
+  server: true,
+  root: ".",
+  version: Mix.Project.config[:version]
 
 # Do not print debug messages in production
 config :logger, level: :info
